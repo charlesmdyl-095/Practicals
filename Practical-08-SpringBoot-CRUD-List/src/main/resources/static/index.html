@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Practical 8 - CRUD Operations</title>
+</head>
+<body>
+  <h2>Practical 8: CRUD Operations on In-Memory List</h2>
+
+  <h3>Add Item</h3>
+  <form id="addForm">
+    <label>Name: </label>
+    <input type="text" id="itemName" required>
+    <button type="submit">Add</button>
+  </form>
+
+  <h3>Items List</h3>
+  <table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="itemsBody"></tbody>
+  </table>
+
+  <script>
+    async function loadItems() {
+      var res = await fetch('/api/items');
+      var items = await res.json();
+      var tbody = document.getElementById('itemsBody');
+      tbody.innerHTML = '';
+      items.forEach(function(item) {
+        tbody.innerHTML += '<tr><td>' + item.id + '</td><td>' + item.name + '</td><td><button onclick="deleteItem(' + item.id + ')">Delete</button></td></tr>';
+      });
+    }
+
+    async function deleteItem(id) {
+      await fetch('/api/items/' + id, { method: 'DELETE' });
+      loadItems();
+    }
+
+    document.getElementById('addForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      var name = document.getElementById('itemName').value;
+      await fetch('/api/items', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name })
+      });
+      document.getElementById('itemName').value = '';
+      loadItems();
+    });
+
+    loadItems();
+  </script>
+</body>
+</html>

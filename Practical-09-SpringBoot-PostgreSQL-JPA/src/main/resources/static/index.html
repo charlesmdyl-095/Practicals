@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Practical 9 - Retrieve Records</title>
+</head>
+<body>
+  <h2>Practical 9: Retrieve Records using Spring Data JPA</h2>
+
+  <button onclick="fetchProducts()">Fetch Records</button>
+  <br><br>
+
+  <table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Product Name</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody id="productsBody"></tbody>
+  </table>
+
+  <script>
+    async function fetchProducts() {
+      var res = await fetch('/api/products');
+      var products = await res.json();
+      var tbody = document.getElementById('productsBody');
+      tbody.innerHTML = '';
+      products.forEach(function(p) {
+        tbody.innerHTML += '<tr><td>' + p.id + '</td><td>' + p.name + '</td><td>' + p.price + '</td></tr>';
+      });
+    }
+
+    fetchProducts();
+  </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="welcomeApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Practical 1 - Dynamic Welcome Message</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="WelcomeController">
+  <h2>Practical 1: Dynamic Welcome Message</h2>
+  
+  <label>Enter Name: </label>
+  <input type="text" ng-model="name" placeholder="Enter your name">
+  
+  <h3>Hello, {{ name ? name : 'Student' }}! Welcome to AngularJS.</h3>
+
+  <script src="app.js"></script>
+</body>
+</html>

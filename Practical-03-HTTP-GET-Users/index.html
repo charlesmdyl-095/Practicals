@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="usersApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Practical 3 - Fetch User Data</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="UsersController">
+  <h2>Practical 3: Fetch Data using $http GET</h2>
+  
+  <button ng-click="getUsers()">Fetch Users</button>
+  <br><br>
+
+  <table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="user in users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.phone }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script src="app.js"></script>
+</body>
+</html>
